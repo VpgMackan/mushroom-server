@@ -38,7 +38,8 @@ To run this project, you will need to add the following environment variables to
 `DB_HOST`
 `DB_DATABASE`
 `DB_PASSWORD`
-`DB_PORT`
+
+`PORT`
 
 `JWT_SECRET`
 
