@@ -1,5 +1,8 @@
 import mysql from "mysql2";
 
+import dotenv from "dotenv";
+dotenv.config();
+
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -19,7 +22,10 @@ export class DB {
         PRIMARY KEY (${data.primary_key})
       );`;
 
-    return sql;
+    connection.query(sql, (err, result) => {
+      if (err) throw err;
+      console.log("Table created");
+    });
   }
 }
 
