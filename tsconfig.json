@@ -8,5 +8,5 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "typeRoots": ["./global.d.ts", "./node_modules/@types"]
+  "typeRoots": ["./global.d.ts", "./express.d.ts", "./node_modules/@types"]
 }

@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 
-import db from "./src/utils/db";
+import { connection } from "./src/utils/db";
 
 import cookieParser from "cookie-parser";
 
@@ -9,7 +9,7 @@ require("better-logging")(console);
 
 dotenv.config();
 
-db.connect((err) => {
+connection.connect((err: any) => {
   if (err) throw err;
   console.log("Connected to database");
 });
@@ -17,6 +17,7 @@ db.connect((err) => {
 const app: Express = express();
 const port = process.env.PORT;
 
+app.use(express.json());
 app.use(cookieParser());
 
 import dbRouter from "./src/routes/db";
