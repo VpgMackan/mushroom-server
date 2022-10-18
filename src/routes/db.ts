@@ -1,8 +1,8 @@
-import { Router, Request, Response } from "express";
+import { Router, Response, Request } from "express";
 
-const router = Router();
+const router: Router = Router();
 
-import { DB } from "../db";
+import { DB } from "../utils/db";
 
 const db = new DB();
 
@@ -20,5 +20,7 @@ router.get("/", (req: Request, res: Response) => {
   });
   res.send("Hello World!");
 });
+
+
 
 export default router;
