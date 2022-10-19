@@ -31,21 +31,22 @@ const generate_table = (data: any) => {
 
 const create_user = async (data: any) => {
   const uuid = uuidv4();
-  const sql = `INSERT INTO users (name, age, email, password, id) VALUES ('${data.name}', '${data.age}', '${data.email}', '${data.password}', '${uuid}');`;
 
-  connection.query(sql, (err, result) => {
-    if (err) throw err;
-  });
+  connection.query(
+    `
+    INSERT INTO users (name, age, email, password, id)
+    VALUES ('${data.name}', '${data.age}', '${data.email}', '${data.password}', '${uuid}');
+    `,
+    (err, result) => {
+      if (err) throw err;
+    }
+  );
 
-  const respone = {
+  return {
     name: data.name,
     email: data.email,
     id: uuid,
   };
-
-  console.log(respone)
-
-  return respone;
 };
 
 export { connection, generate_table, create_user };

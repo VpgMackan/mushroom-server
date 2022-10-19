@@ -1,31 +1,25 @@
-import express, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
-
 import { connection } from "./src/utils/db";
-
-import cookieParser from "cookie-parser";
-
-require("better-logging")(console);
-
-dotenv.config();
-
 connection.connect((err: any) => {
   if (err) throw err;
   console.log("Connected to database");
 });
 
-const app: Express = express();
-const port = process.env.PORT;
+require("better-logging")(console);
 
+import dotenv from "dotenv";
+dotenv.config();
+
+import express, { Express } from "express";
+const app: Express = express();
 app.use(express.json());
+
+import cookieParser from "cookie-parser";
 app.use(cookieParser());
 
-import dbRouter from "./src/routes/db";
-import userRouter from "./src/routes/user";
+import router from "./src/router";
+app.use("/api", router);
 
-app.use("/db", dbRouter);
-app.use("/user", userRouter);
-
+const port = process.env.PORT;
 app.listen(port, () => {
   console.info(`Server is running at https://localhost:${port}`);
 });
