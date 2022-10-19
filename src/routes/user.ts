@@ -14,9 +14,18 @@ router.get("/", Jwt.Read, (req: Request, res: Response) => {
 router.post("/signup", (req: Request, res: Response) => {
   const { name, age, email, password } = req.body;
 
-  const data = create_user({ name, age, email, password });
-
-  res.cookie("jwt", sign()).send("User created");
+  create_user({ name, age, email, password })
+    .catch((err) => {
+      if (err) res.status(400).send(err);
+    })
+    .then((data) => {
+      res
+        .cookie("jwt", sign({data}, process.env.JWT_SECRET), {
+          httpOnly: true,
+          maxAge: 1000 * 60 * 60 * 24,
+        })
+        .send("User created");
+    });
 });
 
 export default router;

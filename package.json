@@ -6,12 +6,14 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/index.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
+    "test": "ts-node test.ts"
   },
   "keywords": [],
   "author": "",
   "license": "LGPL",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "better-logging": "^5.0.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.3",

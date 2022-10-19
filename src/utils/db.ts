@@ -29,15 +29,23 @@ const generate_table = (data: any) => {
   });
 };
 
-const create_user = (data: any) => {
-  const sql = `INSERT INTO users (name, age, email, password, id) VALUES ('${
-    data.name
-  }', '${data.age}', '${data.email}', '${data.password}', '${uuidv4()}');`;
+const create_user = async (data: any) => {
+  const uuid = uuidv4();
+  const sql = `INSERT INTO users (name, age, email, password, id) VALUES ('${data.name}', '${data.age}', '${data.email}', '${data.password}', '${uuid}');`;
 
-  return connection.query(sql, (err, result) => {
+  connection.query(sql, (err, result) => {
     if (err) throw err;
-    return result;
   });
+
+  const respone = {
+    name: data.name,
+    email: data.email,
+    id: uuid,
+  };
+
+  console.log(respone)
+
+  return respone;
 };
 
 export { connection, generate_table, create_user };
