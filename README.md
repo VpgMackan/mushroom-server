@@ -24,6 +24,12 @@ Install dependencies
   npm install
 ```
 
+Build the server
+
+```bash
+  npm run build
+```
+
 Start the server
 
 ```bash
